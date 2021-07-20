@@ -35,7 +35,7 @@ This action signs files that are supported by `signtool.exe` with a code signing
 ```
 runs-on: windows-latest
 steps:
-  uses: nakamula/code-sign-action@v7
+  uses: nakamula/code-sign-action@v8
   with:
     certificate: '${{ secrets.CERTIFICATE }}'
     password: '${{ secrets.PASSWORD }}'
