@@ -165,8 +165,7 @@ async function addCertificateToStore() {
 async function signWithSigntool(fileName) {
     try {
         var vitalParameterIncluded = false;
-//      var command = `"${signtool}" sign /sm /t ${timestampUrl}`;
-        var command = `"${signtool}" sign /t ${timestampUrl}`;
+        var command = `"${signtool}" sign /sm /t ${timestampUrl}`;
         const sha1 = core.getInput('certificatesha1');
         if (sha1 != '') {
             command = command + ` /sha1 "${sha1}"`;
@@ -241,11 +240,10 @@ async function signFiles() {
 }
 async function run() {
     try {
-//      if (await createCertificatePfx()) {
-//          if (await addCertificateToStore())
-//              await signFiles();
-//      }
-        await signFiles();
+        if (await createCertificatePfx()) {
+            if (await addCertificateToStore())
+                await signFiles();
+        }
     }
     catch (err) {
         core.setFailed(`Action failed with error: ${err}`);
