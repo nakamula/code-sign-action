@@ -120,9 +120,7 @@ const process_1 = __webpack_require__(765);
 const asyncExec = util_1.default.promisify(child_process_1.exec);
 const certificateFileName = process_1.env['TEMP'] + '\\certificate.pfx';
 const timestampUrl = 'http://timestamp.digicert.com';
-// const signtool = 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe';
-// debug
-const signtool = 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.19041.0/x64/signtool.exe';
+const signtool = 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe';
 const signtoolFileExtensions = [
     '.dll', '.exe', '.sys', '.vxd',
     '.msix', '.msixbundle', '.appx',
@@ -168,7 +166,7 @@ async function signWithSigntool(fileName) {
     try {
         var vitalParameterIncluded = false;
 //      var command = `"${signtool}" sign /sm /t ${timestampUrl}`;
-        var command = `"${signtool}" sign /tr ${timestampUrl} /td SHA256 /fd SHA256`;
+        var command = `"${signtool}" sign /t ${timestampUrl}`;
         const sha1 = core.getInput('certificatesha1');
         if (sha1 != '') {
             command = command + ` /sha1 "${sha1}"`;
